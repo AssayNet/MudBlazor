@@ -257,7 +257,10 @@ namespace MudBlazor
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
+            {
+                _currentPage = InitialPage;
                 await InvokeServerLoadFunc();
+            }
 
             TableContext.UpdateRowCheckBoxes();
             await base.OnAfterRenderAsync(firstRender);
@@ -272,7 +275,6 @@ namespace MudBlazor
         [Parameter] public Func<TableState, Task<TableData<T>>> ServerData { get; set; }
 
         internal override bool HasServerData => ServerData != null;
-
 
         TableData<T> _server_data = new TableData<T>() { TotalItems = 0, Items = Array.Empty<T>() };
         private IEnumerable<T> _items;
@@ -293,6 +295,10 @@ namespace MudBlazor
             };
 
             _server_data = await ServerData(state);
+
+            // Update local page
+            _currentPage = _server_data.Page;
+
             StateHasChanged();
             Context?.PagerStateHasChanged?.Invoke();
         }

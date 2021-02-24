@@ -15,7 +15,7 @@ namespace MudBlazor
     {
         internal object _editingItem = null;
 
-        private int _currentPage = 0;
+        protected int _currentPage = 0;
 
         protected string Classname =>
         new CssBuilder("mud-table")
@@ -82,6 +82,9 @@ namespace MudBlazor
         /// Note: requires a MudTablePager in PagerContent.
         /// </summary>
         [Parameter] public int RowsPerPage { get; set; } = 10;
+
+        [Parameter]
+        public int InitialPage { get; set; }
 
         /// <summary>
         /// The page index of the currently displayed page (Zero based). Usually called by MudTablePager.
