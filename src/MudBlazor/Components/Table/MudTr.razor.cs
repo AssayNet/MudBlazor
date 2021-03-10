@@ -48,10 +48,10 @@ namespace MudBlazor
             Context?.Table.SetSelectedItem(Item);
             Context?.Table.SetEditingItem(Item);
 
-            if (Context?.Table.MultiSelection == true && !IsHeader)
-            {
-                IsChecked = !IsChecked;
-            }
+            //if (Context?.Table.MultiSelection == true && !IsHeader)
+            //{
+            //    IsChecked = !IsChecked;
+            //}
             Context?.Table.FireRowClickEvent(args, this, Item);
         }
 
